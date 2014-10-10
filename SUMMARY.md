@@ -11,4 +11,11 @@
 * [运行 SBT](running.md)
 * [配置文件 .sbt](build_define.md)
 * [配置作用域](scope.md)
+* [配置参数的方法](kind_setting.md)
+* [Lib库依赖](lib_depend.md)
+* [多项目构建](multi_project.md)
+* [插件使用](using_plugin.md)
+* [自定义配置和任务](custom_setting.md)
+* [配置文件 .scala](scala_build.md)
+* [总结](start_summary.md)
 

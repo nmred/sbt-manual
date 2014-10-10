@@ -1,4 +1,4 @@
-## 作用域
+# 作用域
 
 ### 深入 Keys
 
@@ -133,7 +133,25 @@
 [info]  runtime:fullClasspath
 ```
 
+在第一行中可以看到一个任务key, 其值得类型是 `scala.collection.Seq[sbt.Attributed[java.io.File]].`
+
+"Provided by" 表示该配置参数定义的作用域: `{file:/home/hp/checkout/hello/}default-aea33a/test:fullClasspath ` (fullClasspath 配置在作用域任务维度为test，作用域项目维度为{file:/home/hp/checkout/hello/}default-aea33a的作用域中)
+
+"Dependencies": [配置参数]()章节解释
+
+"Delegates": 表示如果某个key没有定义，将按照以下路劲搜索：
+
+* 两个配置作用域（`runtime:fullClasspath`, `compile:fullClasspath`），在这些作用域中的key，项目维度没有指定默认是当前项目，任务维度没有指定默认是任务全局作用域
+* 配置维度为全局的作用域（`*:fullClasspath`），项目维度没有指定默认是当前项目，任务维度没有指定默认是任务全局作用域
+* 项目维度设置`{.}`或者ThisBuild (表示工程级别的作用域，没有指定项目)
+* 项目维度设置为全局作用域(`*/test:fullClasspath`)(注意：当没有指定项目的时候表示当前项目，这块代表的意思是全局作用域，比如 `*/test:fullClasspath` 和 `test:fullClasspath`代表的意义不一样)
+* 项目和配置维度都为全局的作用域 (`*/*:fullClasspath`), 任务维度没有指定，所以当设定为` */*:fullClasspath` 作用域时，在作用域的三个维度上都为全局的
+
+运行 `inspect fullClasspath`（对比上一个例子`inspect test:fullClasspath`） 会发现返回的结果有所不同，这是因为当不指定配置维度的作用域时，sbt将`inspect fullClasspath`自动探测为 `compile.inspect compile:fullClasspath`执行.
+
+
 ### 如何在工程构建中定义作用域
+
 
 
 ### 什么时候指定作用域
