@@ -152,7 +152,54 @@
 
 ### 如何在工程构建中定义作用域
 
+如果单独在build.sbt中创建一个key，这个key作用域的项目维度将为当前项目，配置和任务维度将为全局作用域:
 
+```
+name := "hello"
+```
+
+运行命令`inspect name`将看到"Provided by"为：`{file:/home/hp/checkout/hello/}default-aea33a/*:name`， 表示作用域项目维度为 `{file:/home/hp/checkout/hello/}default-aea33a`, 作用域任务维度为`*`(全局) ， 作用域任务维度没有指定默认代表全局,
+build.sbt 定义是针对单个项目的，所以“当前项目”指的就是当前build.sbt定义的项目(对于[多项目构建](multi_project.html),每个项目有对应一个build.sbt)
+
+所有的key都有一个方法用来设定作用域，其参数可以为作用域的任何一个维度的对象实例。例如，可以通过如下方式将`name`配置设置为配置维度为`Compile` 的作用域：
+
+```
+name in Compile := "hello"
+```
+
+或者可以将`name`配置设置为任务维度为`packageBin`的作用域（当然这例子有点不合适）
+
+```
+name in packageBin := "hello"
+```
+
+当然了也可以为一个key指定多个作用域维度,例如将key `name` 同时指定配置维度和任务维度：
+
+```
+name in (Compile, packageBin) := "hello"
+```
+
+也可以指定一个key的作用域为全局：
+
+```
+name in Global := "hello"
+```
+
+(`name in Global` 隐式将作用域转化为一个对于所有维度都为全局的作用域，默认情况下任务和配置维度的作用域已经是全局的了，但是这块会影响项目维度的作用，因为其隐式转化为`*/*:name`而不是`{file:/home/hp/checkout/hello/}default-aea33a/*:name`)
+
+如果没有用过Scala语言，理解 `in` 和 `:=` 这两个方法很重要，推荐用scala语法形式配置，但是也可以用Java语法形式配置：
+
+```
+name.in(Compile).:=("hello")
+```
 
 ### 什么时候指定作用域
+
+当定义一个key在默认作用域下会有问题时需要指定作用域，例如`compile`任务类型的配置，默认作用域是在 `Compile`或`Test`配置维度下，不会存在于其他作用域中。
+
+如果修改`compile`这个任务配置的值需要指定其作用域，修改语句如`compile in Compile`或`compile in Test`, 如果单独写作为`compile` sbt 会重新创建一个作用域为当前项目的任务配置，而不是去修改在配置维度作用域下的标准compile任务配置。
+
+如果得到一个错误信息“Reference to undefined setting”， 一般情况下是因为配置项指定作用域失败或者指定了一个错误的作用域。当定义的key可能在其他作用域中已经定义会接收到“Did you mean compile:compile?”错误提示信息
+
+一般会简单的认为配置项就是一个key-value键值对，其实对于所有的配置项都会包含一个key-value 和一个对应的作用域（作用域有三个维度），如配置表达式：` packageOptions in (Compile, packageBin)`, 当配置为`packageOptions`也是一个合法的配置项，只是该配置项的作用域将是默认的作用域(项目维度为当前项目，任务和配置维度为全局)
 
