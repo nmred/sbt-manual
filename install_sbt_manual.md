@@ -17,6 +17,4 @@ java $SBT_OPTS -jar `dirname $0`/sbt-launch.jar "$@"
 $ chmod u+x ~/bin/sbt
 ```
 
-## Windows
-
 [sbt-jar]:(http://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.5/sbt-launch.jar)
