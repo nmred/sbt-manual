@@ -11,6 +11,10 @@
 对于翻译有任何问题，可以再 [Issue](https://github.com/nmred/sbt-manual/issues) 中提出, 或者直接[Pull requests](https://github.com/nmred/sbt-manual/pulls)
 也可以直接微博 @虚风竹叶
 
+### 版本
+
+V0.1.1 (初稿)
+
 ### 介绍
 
  SBT 是一个灵活强大的项目构建工具，相比其他构建工具配置用起来会发现特别的简洁，但是从功能上看一点都逊色于其他构建工具。
