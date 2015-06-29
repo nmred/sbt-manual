@@ -9,9 +9,7 @@
 ### 校稿
 
 对于翻译有任何问题，可以再 [Issue](https://github.com/nmred/sbt-manual/issues) 中提出, 或者直接[Pull requests](https://github.com/nmred/sbt-manual/pulls)
-也可以直接
-
-微博 @虚风竹叶
+也可以直接微博 @虚风竹叶
 
 Email: nmred.hao@gmail.com
 
