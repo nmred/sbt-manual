@@ -52,10 +52,10 @@ scalaVersion := "2.10.3"
 
 ### 设置 SBT 版本
 
-可以强制使用某个 sbt 版本在构建项目的时候，需要在 hello/project/budil.properties 文件中配置：
+可以强制使用某个 sbt 版本在构建项目的时候，需要在 hello/project/build.properties 文件中配置：
 
 ```
 sbt.version = 0.13.5
 ```
 
-强制使用 sbt 的 0.13.5 版本， 虽然sbt 版本间 99% 是兼容的，不过设置hello/project/budil.properties 指定 sbt 版本可以避免版本之间不兼容导致的一些潜在问题。
+强制使用 sbt 的 0.13.5 版本， 虽然sbt 版本间 99% 是兼容的，不过设置hello/project/build.properties 指定 sbt 版本可以避免版本之间不兼容导致的一些潜在问题。
