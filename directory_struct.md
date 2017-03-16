@@ -1,6 +1,6 @@
 # 目录结构
 
-###根目录
+### 根目录
 
 在 sbt 术语中 “根目录”是一个包含项目的目录，所以如果创建一个 hello 项目将包含 hello/build.sbt 和 hello/hw.scala 在 hello world 项目例子中，其中hello是根目录
 
